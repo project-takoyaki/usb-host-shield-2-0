@@ -344,8 +344,7 @@ void HIDComposite::EndpointXtract(uint8_t conf, uint8_t iface, uint8_t alt, uint
                 // Fill in the endpoint index list
                 piface->epIndex[index] = bNumEP; //(pep->bEndpointAddress & 0x0F);
 
-                if(pollInterval < pep->bInterval) // Set the polling interval as the largest polling interval obtained from endpoints
-                        pollInterval = pep->bInterval;
+                pollInterval = 0;
 
                 bNumEP++;
         }
