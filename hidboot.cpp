@@ -95,6 +95,26 @@ void MouseReportParser::Parse(USBHID *hid __attribute__((unused)), bool is_rpt_i
                 // event = true;
         }
 
+        if(prevState.mouseInfo.bmButton4 != pmi->bmButton4) {
+                if(pmi->bmButton4) {
+                        OnButton4Down(pmi);
+                } else {
+                        OnButton4Up(pmi);
+                }
+                // Future:
+                // event = true;
+        }
+
+        if(prevState.mouseInfo.bmButton5 != pmi->bmButton5) {
+                if(pmi->bmButton5) {
+                        OnButton5Down(pmi);
+                } else {
+                        OnButton5Up(pmi);
+                }
+                // Future:
+                // event = true;
+        }
+
         //
         // Scroll wheel(s), are not part of the spec, but we could support it.
         // Logitech wireless keyboard and mouse combo reports scroll wheel in byte 4
@@ -105,7 +125,7 @@ void MouseReportParser::Parse(USBHID *hid __attribute__((unused)), bool is_rpt_i
 
         // Mice only report motion when they actually move!
         // Why not just pass the x/y values to simplify things??
-        if(pmi->dX || pmi->dY) {
+        if(pmi->dX || pmi->dY || pmi->dZ) {
                 OnMouseMove(pmi);
                 // Future:
                 // event = true;

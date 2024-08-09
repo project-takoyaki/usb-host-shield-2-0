@@ -42,10 +42,13 @@ struct MOUSEINFO {
                 uint8_t bmLeftButton : 1;
                 uint8_t bmRightButton : 1;
                 uint8_t bmMiddleButton : 1;
-                uint8_t bmDummy : 5;
+                uint8_t bmButton4 : 1;
+                uint8_t bmButton5 : 1;
+                uint8_t bmDummy : 3;
         };
         int8_t dX;
         int8_t dY;
+        int8_t dZ;
 };
 
 class MouseReportParser : public HIDReportParser {
@@ -79,6 +82,18 @@ protected:
         };
 
         virtual void OnMiddleButtonDown(MOUSEINFO *mi __attribute__((unused))) {
+        };
+
+        virtual void OnButton4Up(MOUSEINFO *mi __attribute__((unused))) {
+        };
+
+        virtual void OnButton4Down(MOUSEINFO *mi __attribute__((unused))) {
+        };
+
+        virtual void OnButton5Up(MOUSEINFO *mi __attribute__((unused))) {
+        };
+
+        virtual void OnButton5Down(MOUSEINFO *mi __attribute__((unused))) {
         };
 };
 
